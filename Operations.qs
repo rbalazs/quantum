@@ -1,11 +1,11 @@
-﻿namespace Quantum.Superposition {
+﻿namespace Quantum.Entaglement {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;
     
 
     @EntryPoint()
-    operation Superposition() : Result {
+    operation Entaglement() : Result {
         mutable state = Zero;
         using(qubit = Qubit()) {
             H(qubit);
