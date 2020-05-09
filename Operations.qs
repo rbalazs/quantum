@@ -2,17 +2,24 @@
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;
-    
+  
+    operation Entaglement() : (Result, Result) {
 
-    @EntryPoint()
-    operation Entaglement() : Result {
-        mutable state = Zero;
-        using(qubit = Qubit()) {
-            H(qubit);
-            set state = M(qubit);
-            Reset(qubit);
+        mutable qubitOneState = Zero;
+        mutable qubitTwoState = Zero;
+
+        using ((qubitOne, qubitTwo) = (Qubit(), Qubit())) {
+            // There are others syntax to entangle 2 qubits.
+            H(qubitOne);
+            CNOT(qubitOne, qubitTwo);
+
+            set qubitOneState = M(qubitOne);
+            set qubitTwoState = M(qubitTwo);
+
+            Reset(qubitOne);
+            Reset(qubitTwo);
         }
-        return state;
+
+        return (qubitOneState, qubitTwoState);
     }
 }
-
